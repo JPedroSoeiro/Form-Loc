@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Formulario de inscrição</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+   <body>
+      
+         <div class="form-image">
+               <img src="undraw_map_dark_re_36sy (1).svg" alt="" height="418xp">
+            </div>
+            <div class="container">
+            <div class="form">
+               <form action="#">
+                  <div class="form-header">
+                     <div class="title">
+                     <h1>Localize-se</h1>
+                     <div class="login-button"></div>
+                     <button><a href="#">Houve um problema</a></button>
+                     </div>
+                  </div>
+                  <div class="input-group">
+                     <div class="input-box">
+                        <label for="number">CEP</label>
+                        <input  id="nCep" type="number" name="number" placeholder="Ex: 12345678" required>
+                     </div>
+                     
+                     <div class="input-box">
+                        <label for="text">Logradouro</label>
+                        <input id="nLogradouro" type="text" name="text" placeholder="Ex: Rua X, Travessa Y, Av Z." required>
+                     </div>
+                     
+                     <div class="input-box">
+                        <label for="number">Número</label>
+                        <input id="nNumero" type="number" name="number" placeholder="N° da casa/apartamento" required>
+                     </div>
+                     
+                     <div class="input-box">
+                        <label for="text">Bairro</label>
+                        <input id="nBairro" type="text" name="text" placeholder="Ex: Damas" required>
+                     </div>
+                     
+                     <div class="input-box">
+                        <label for="text">Cidade</label>
+                        <input id="nCidade" type="text" name="text" placeholder="Ex: Fortaleza" required>
+                     </div>
+                     
+                     <div class="input-box">
+                        <label for="text">UF</label>
+                        <input id="nUF" type="text" name="text" placeholder="Ex: CE" required>
+                     </div>
+
+                     <div class="input-box">
+                        <label for="text">Pais</label>
+                        <input id="pais" type="text" name="text" placeholder="Brasil" required>
+                     </div>
+                  </div>
+                  
+                  <div class="continue-button">
+                  <button onclick="nCepp()">procurar</button>
+                  </div>
+               </form>
+         </div>
+      </div>
+      
+      <script>
+         function nCepp(){
+            nLogradouro.value ="";
+            nBairro.value = "";
+            nCidade.value = "";
+            nUF.value = "";
+            pais.value = "Brasil";
+         
+            fetch(`https://viacep.com.br/ws/${nCep.value}/json/`)
+            .then(function (resposta){
+               return resposta.json();
+            })
+         
+            .then(function (conteudo){
+               nLogradouro.value = conteudo.logradouro;
+               nBairro.value = conteudo.bairro;
+               nCidade.value = conteudo.localidade;
+               nUF.value = conteudo.uf;
+               pais.value = "Brasil";
+            });
+         }
+         
+      </script>
+      
+   </body>
+</html>
